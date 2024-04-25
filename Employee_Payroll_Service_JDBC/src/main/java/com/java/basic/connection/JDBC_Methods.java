@@ -11,10 +11,8 @@ import java.util.List;
 
 public class JDBC_Methods {
 
-	public String createConnection(String url) 
+	public String createConnection(String url, String username, String password) 
 	{
-		String username="root";
-		String password="Root";
 		try 
 		{	
 			Connection connection=DriverManager.getConnection(url, username, password);
@@ -28,12 +26,9 @@ public class JDBC_Methods {
 		}
 	}
 	
-	public List<EmployeePayroll> getemployeeData(String url) throws Exceptionclass {
+	public List<EmployeePayroll> getemployeeData(String url, String username, String password) throws Exceptionclass {
 	List<EmployeePayroll> employeePayrolllist=new ArrayList<EmployeePayroll>();
-		
-		String username="root";
-		String password="Root";
-		
+	
 		try 
 		{
 			Connection connection=DriverManager.getConnection(url, username, password);
@@ -58,5 +53,22 @@ public class JDBC_Methods {
 		}
 		
 		return employeePayrolllist;
+	}
+
+	public int updateSalary(String url, String username, String password) throws Exceptionclass 
+	{
+		try {
+			Connection connection=DriverManager.getConnection(url, username, password);
+			Statement statement = connection.createStatement();
+			String query="UPDATE payroll_service_database.employee_payroll \r\n"
+					+ "SET basicPay = 35000 \r\n"
+					+ "WHERE id = 2";
+			
+			int executeUpdate = statement.executeUpdate(query);
+			return executeUpdate;
+			
+		} catch (SQLException e) {
+			throw new Exceptionclass("Data Not updated in Database...");
+		}
 	}
 }
