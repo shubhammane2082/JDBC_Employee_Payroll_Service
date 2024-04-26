@@ -22,6 +22,8 @@ public class Testcase
 	{
 		methods=new JDBC_Methods();
 	}
+	
+	
 	@Test
 	public void createconnectionTestCase() {
 		String result=methods.createConnection(url,username,password);
@@ -29,6 +31,7 @@ public class Testcase
 		
 		assertEquals(expectedResult, result);
 	}
+	
 	
 	@Test
 	public void getemployeeDataTestcase() throws Exceptionclass
@@ -43,11 +46,35 @@ public class Testcase
 		assertEquals("2000-09-20", employeePayroll.getStartDate().toString());
 	}
 	
+	
 	@Test
 	public void updateSalaryTestcase() throws Exceptionclass
 	{
 		int salaryResult=methods.updateSalary(url,username,password);
 		assertEquals(salaryResult, 1);
+	}
+	
+	
+	@Test
+	public void retrieveInfoDaterangeTestcase() throws Exceptionclass
+	{
+		List<EmployeePayroll> retrieveDataList = methods.retrieveInfoDaterange(url, username, password);
+		
+		EmployeePayroll employeePayroll=retrieveDataList.get(0);
+		
+		assertEquals(1, employeePayroll.getId());
+		assertEquals("Suraj", employeePayroll.getName());
+		assertEquals(25000.0, employeePayroll.getBasicPay(),0.01);
+		assertEquals("2000-09-20", employeePayroll.getStartDate().toString());
+	}
+	
+	
+	@Test
+	public void AggerateoperationTestcase() throws Exceptionclass
+	{
+		double actualResult = methods.Aggerateoperation(url, username, password);
+		
+		assertEquals(154500.0, actualResult,0.01);
 	}
 
 }

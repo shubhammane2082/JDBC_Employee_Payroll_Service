@@ -22,13 +22,18 @@ public class Main {
 //		}
 		int salaryResult=methods.updateSalary(url,username,password);
 		
-		List<EmployeePayroll> listResult = methods.retrieveInfoDaterange(url,username,password);
-		System.out.println("Employee Who Joins Date range Between '2000-09-20' and '2020-10-22' are :");
-		System.out.println("----------------------------------------------------------------");
-		for(EmployeePayroll employeePayroll : listResult)
-		{
-			System.out.println("\nId is : "+employeePayroll.getId()+"\n"+"Name is : "+employeePayroll.getName()+"\n"+"Basic Pay is : "+employeePayroll.getBasicPay()+"\n"+"Start Date is : "+employeePayroll.getStartDate()+"\n-------------------------------------------------");
-		}
+//		List<EmployeePayroll> listResult = methods.retrieveInfoDaterange(url,username,password);
+//		
+//		System.out.println("Employee Who Joins Date range Between '2000-09-20' and '2020-10-22' are :");
+//		System.out.println("----------------------------------------------------------------");
+//		
+//		for(EmployeePayroll employeePayroll : listResult)
+//		{
+//			System.out.println("\nId is : "+employeePayroll.getId()+"\n"+"Name is : "+employeePayroll.getName()+"\n"+"Basic Pay is : "+employeePayroll.getBasicPay()+"\n"+"Start Date is : "+employeePayroll.getStartDate()+"\n-------------------------------------------------");
+//		}
+		
+		double result1 = methods.Aggerateoperation(url,username,password);
+		System.out.println("sum of salary for gender male is : "+result1);
 		
 	}
 

@@ -83,7 +83,7 @@ public class JDBC_Methods {
 		}
 	}
 
-	public List<EmployeePayroll> retrieveInfoDaterange(String url, String username, String password)
+	public List<EmployeePayroll> retrieveInfoDaterange(String url, String username, String password) throws Exceptionclass
 	{
 		List<EmployeePayroll> employeePayrolllist=new ArrayList<EmployeePayroll>();	
 		try {
@@ -104,9 +104,32 @@ public class JDBC_Methods {
 			}
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+
+			throw new Exceptionclass("There is no any Employee within given joining...");
 		}
 		return employeePayrolllist;
+	}
+
+	public double Aggerateoperation(String url, String username, String password) throws Exceptionclass {
+		
+		try {
+			Connection connection=DriverManager.getConnection(url, username, password);
+			Statement statement = connection.createStatement();
+			String query="select sum(basicPay) from employee_payroll where gender='Male' group by gender";
+			ResultSet resultSet = statement.executeQuery(query);
+			double sum = 0;
+			
+			while(resultSet.next())
+			 {
+				sum=resultSet.getDouble(1); 
+			 }
+			 connection.close();
+			 statement.close();
+			 
+			return sum;
+		} catch (SQLException e) {
+			throw new Exceptionclass("Not able calculate value of function...");
+		}
+		
 	}
 }
