@@ -16,13 +16,20 @@ public class Main {
 //		System.out.println(result);
 		
 		List<EmployeePayroll> resultList=methods.getemployeeData(url,username,password);
-		for(EmployeePayroll employeePayroll : resultList)
+//		for(EmployeePayroll employeePayroll : resultList)
+//		{
+//			System.out.println("Employee Id is : "+employeePayroll.getId()+" and Employee Name is : "+employeePayroll.getName()+" and Employee Basic Pay is : "+employeePayroll.getBasicPay()+" and Employee Start Date is : "+employeePayroll.getStartDate());
+//		}
+		int salaryResult=methods.updateSalary(url,username,password);
+		
+		List<EmployeePayroll> listResult = methods.retrieveInfoDaterange(url,username,password);
+		System.out.println("Employee Who Joins Date range Between '2000-09-20' and '2020-10-22' are :");
+		System.out.println("----------------------------------------------------------------");
+		for(EmployeePayroll employeePayroll : listResult)
 		{
-			System.out.println("Employee Id is : "+employeePayroll.getId()+" and Employee Name is : "+employeePayroll.getName()+" and Employee Basic Pay is : "+employeePayroll.getBasicPay()+" and Employee Start Date is : "+employeePayroll.getStartDate());
+			System.out.println("\nId is : "+employeePayroll.getId()+"\n"+"Name is : "+employeePayroll.getName()+"\n"+"Basic Pay is : "+employeePayroll.getBasicPay()+"\n"+"Start Date is : "+employeePayroll.getStartDate()+"\n-------------------------------------------------");
 		}
 		
-		int salaryResult=methods.updateSalary(url,username,password);
-		System.out.println(salaryResult);
 	}
 
 }

@@ -79,7 +79,34 @@ public class JDBC_Methods {
 		} 
 		catch (SQLException e) 
 		{
-			throw new Exceptionclass("Data Not updated in Database...");
+			throw new Exceptionclass("Salary Not updated in Database...");
 		}
+	}
+
+	public List<EmployeePayroll> retrieveInfoDaterange(String url, String username, String password)
+	{
+		List<EmployeePayroll> employeePayrolllist=new ArrayList<EmployeePayroll>();	
+		try {
+			Connection connection=DriverManager.getConnection(url, username, password);
+			Statement statement = connection.createStatement();
+			String query="SELECT * FROM payroll_service_database.employee_payroll where startDate between '2000-09-20' and '2020-10-22'";
+			ResultSet resultSet = statement.executeQuery(query);
+			
+			while(resultSet.next())
+			{
+				int id=resultSet.getInt("id");
+				String name=resultSet.getString("name");
+				double basicpay=resultSet.getDouble("basicPay");
+				LocalDate startDate=resultSet.getDate("startDate").toLocalDate();
+				
+				EmployeePayroll employeePayroll=new EmployeePayroll(id, name, basicpay, startDate);
+				employeePayrolllist.add(employeePayroll);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return employeePayrolllist;
 	}
 }
