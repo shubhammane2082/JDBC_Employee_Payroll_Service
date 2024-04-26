@@ -2,12 +2,15 @@ package com.java.basic.connection;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.mysql.cj.xdevapi.PreparableStatement;
 
 public class JDBC_Methods {
 
@@ -57,17 +60,25 @@ public class JDBC_Methods {
 
 	public int updateSalary(String url, String username, String password) throws Exceptionclass 
 	{
-		try {
+		try 
+		{
 			Connection connection=DriverManager.getConnection(url, username, password);
-			Statement statement = connection.createStatement();
 			String query="UPDATE payroll_service_database.employee_payroll \r\n"
-					+ "SET basicPay = 35000 \r\n"
-					+ "WHERE id = 2";
+					+ "SET basicPay = ? \r\n"
+					+ "WHERE id = ?";
+			PreparedStatement preparedStatement=connection.prepareStatement(query);
+			preparedStatement.setInt(1, 49000);
+			preparedStatement.setInt(2, 3);
 			
-			int executeUpdate = statement.executeUpdate(query);
+			int executeUpdate = preparedStatement.executeUpdate();
+			
+			connection.close();
+			preparedStatement.close();
+			
 			return executeUpdate;
-			
-		} catch (SQLException e) {
+		} 
+		catch (SQLException e) 
+		{
 			throw new Exceptionclass("Data Not updated in Database...");
 		}
 	}

@@ -22,6 +22,7 @@ public class Main {
 		}
 		
 		int salaryResult=methods.updateSalary(url,username,password);
+		System.out.println(salaryResult);
 	}
 
 }
